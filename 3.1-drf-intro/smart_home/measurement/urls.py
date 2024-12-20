@@ -1,15 +1,12 @@
-from django.urls import path
-
 from rest_framework import routers
 
-from .views import SensorView, SingleSensorView, MeasurementView
+from .views import SensorViewSet, DetailSensorViewSet, MeasurementViewSet
 
 router = routers.DefaultRouter()
+router.register('sensors', SensorViewSet)
+router.register('sensors', DetailSensorViewSet)
+router.register('measurements', MeasurementViewSet)
 
 app_name = "measurement"
 
-urlpatterns = [
-    path('sensors/', SensorView.as_view()),
-    path('sensors/<int:pk>/', SingleSensorView.as_view()),
-    path('measurements/', MeasurementView.as_view()),
-]
+urlpatterns = router.urls
